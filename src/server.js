@@ -17,7 +17,7 @@ const url = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send('Welcome to Webproject ');
+  res.send('Welcome to Webproject');
 });
 
 app.get('/records', (req, res) => {

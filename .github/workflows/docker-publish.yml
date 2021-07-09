@@ -17,4 +17,4 @@ jobs:
         cd ./src
         echo "${{ secrets.DOCKERPW }}" | docker login -u "ronald20065" --password-stdin
         docker image build -t ronald20065/nodemongo .
-        docker push ronald20065/gitops:nodemongo
+        docker push ronald20065/nodemongo

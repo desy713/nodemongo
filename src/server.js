@@ -18,10 +18,7 @@ const app = express();
 
 app.get('/', (req, res) => {
   res.send('Welcome to Webproject');
-  console.log(DB_USER);
-  console.log(url);
 });
-
 
 app.get('/records', (req, res) => {
   MongoClient.connect(url, function(err, db) {

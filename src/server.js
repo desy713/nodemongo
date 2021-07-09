@@ -68,7 +68,7 @@ app.get('/metrics', (req, res) => {
     }
   });
 });
-
+/*
 // Create 'records' collection
 MongoClient.connect(url, function(err, db) { 
   var dbo = db.db(DB_NAME);
@@ -78,6 +78,6 @@ MongoClient.connect(url, function(err, db) {
     db.close();
   });
 });
-
+*/
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);

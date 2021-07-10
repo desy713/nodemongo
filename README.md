@@ -6,7 +6,7 @@ docker build -t ronald20065/nodemongo . &&  docker push ronald20065/nodemongo
 ```
 ### 2. Helm chart ###
 
-sample helm chart was created,
+sample helm chart was created using below command
 ```shell
   helm create nodemongo
 ```
@@ -37,15 +37,15 @@ service:
 
 ```
 
-ingress is deploied to exporse the service in normal way with port 80. nodemongo.com is set as the host
+ingress is deploied to exporse the service in normal way with port 80. 'nodemongo.com' is set as the host
  value. Once this is deployed application will be accessible through nodemongo.com url locally.
-  -nodemongo.com need to be added to the /etc/hosts file with the minikube ip
-  - run (minikube addons enable ingress) to enable ingree addons if it is not enabled
+  * nodemongo.com need to be added to the '/etc/host's file with the minikube ip
+  * run (minikube addons enable ingress) to enable ingree addons if it is not enabled
 
 
 basic values to start the mongodb was passed as follows. bitnamai mongo cahrd was used and values were
  set according to the Read.me file. Inorder to make mongodb a statfulset, useStatefulSet is set to True
-(clear text values used for simplisity)
+(clear text values used for simplisity of passwords rather than using secrets)
 
 ```yaml
 mongodb:
@@ -62,30 +62,26 @@ mongodb:
     port: 27017
 ```
 
-`Chart.yaml` 
-2 dependancies were included in chart.yaml file as follows. 
+ 
+Two dependancies were included in `chart.yaml` file as follows. 
 
 ```yaml
 dependencies:
 - name: nginx-ingress
   version: 1.41.2
-  repository: alias:stable
+  repository: https://charts.helm.sh/stable
 - name: mongodb
   version: 10.3.3
-  repository: alias:bitnami
+  repository: https://charts.bitnami.com/bitnami
   alias: mongodb
   condition: mongodb.enabled
 ```
 
-below tow repos are used to get the dependancy charts. to add/update and include the dependancies 
-run following commands.
+To include the dependancies run following command.
 ```shell
-  helm repo add stable https://charts.helm.sh/stable
-  helm repo add bitnami https://charts.bitnami.com/bitnami
-  helm repo update
   helm dep update ./nodemongo/
 ```
-deployment.yaml
+`deployment.yaml`
 
 docker image needs environment variables to start the image, as it is mentioned in the server.js.
 these vaules are fetched from `values.yaml` contect to below variables.
@@ -94,9 +90,9 @@ liveness-probe and rediness-probes were set to the /healthcheck
 ```yaml
           env:
             - name: DB_HOST
-              value: {{ .Release.Name }}-mongodb
+              value: {{ .Release.Name }}-{{ .Values.mongodb.service.name }}
             - name: DB_PORT
-              value: "27017"
+              value: {{ .Values.mongodb.service.port | quote }}
             - name: DB_NAME
               value: {{ .Values.mongodb.auth.database | quote }}
             - name: DB_USER

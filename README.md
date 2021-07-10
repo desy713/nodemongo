@@ -62,6 +62,13 @@ mongodb:
     port: 27017
 ```
 
+Below initContainer was created to start the application just after mongo service is up.
+```
+      initContainers:
+        - name: init-myservice
+          image: busybox
+          command: ['sh', '-c', 'until nslookup nodemongo-mongodb; do echo waiting for mongodb serrvicemeld; sleep 3; done;']
+```
  
 Two dependancies were included in `chart.yaml` file as follows. 
 
@@ -116,7 +123,7 @@ liveness-probe and rediness-probes were set to the /healthcheck
 to run the helm chart : 
 ```shell
 helm install nodemongo ./nodemongo/
-verify: kubectl get all
+kubectl get all
 ```
 
 ### 3. CI/CD ###

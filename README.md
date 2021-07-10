@@ -24,6 +24,7 @@ image:
 
 Application will have a service with below mentioned values. 
 
+```yaml
 service:
   type: NodePort
   port: 8080
@@ -32,6 +33,7 @@ service:
   targetPort: 8080
   portinternalPort: 3000
 
+```
 
 ingress is deploied to exporse the service in normal way with port 80. nodemongo.com is set as the host
  value. Once this is deployed application will be accessible through nodemongo.com url locally.
@@ -42,6 +44,8 @@ ingress is deploied to exporse the service in normal way with port 80. nodemongo
 basic values to start the mongodb was passed as follows. bitnamai mongo cahrd was used and values were
  set according to the Read.me file. Inorder to make mongodb a statfulset, useStatefulSet is set to True
 (clear text values used for simplisity)
+
+```yaml
 mongodb:
   enabled: true
   type: provided
@@ -54,6 +58,7 @@ mongodb:
   service:
     name: mongodb
     port: 27017
+```
 
 Chart.yaml 
 2 dependancies were included in chart.yaml file as follows. 

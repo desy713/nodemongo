@@ -7,14 +7,28 @@ on:
       
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
-    - name: Build & Push Image
+    - name: build nodemongo image
       run: |
         cd ./src
         echo "${{ secrets.DOCKERPW }}" | docker login -u "ronald20065" --password-stdin
         docker image build -t ronald20065/nodemongo .
-        docker push ronald20065/nodemongo
+    - name: docker image push
+      run: docker push ronald20065/nodemongo
+
+  helm-deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: dependancy update
+      uses: WyriHaximus/github-action-helm3@v2
+      with:
+        exec: helm dependency update ./nodemongo
+    - name: Helm install app
+      uses: WyriHaximus/github-action-helm3@v2
+      with:
+        exec: helm upgrade --install nodemongo ./nodemongo
+        kubeconfig: '${{ secrets.KUBECONFIG }}'

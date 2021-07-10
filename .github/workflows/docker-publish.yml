@@ -23,6 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+    - uses: actions/checkout@v1
     - name: dependancy update
       uses: WyriHaximus/github-action-helm3@v2
       with:

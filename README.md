@@ -1,4 +1,3 @@
-=====================================================
 1. docker image build was done with the Dockerfile. built image was tagged as the latest and pushed to my dockerhub for deployment.
 
 ```shell
@@ -122,7 +121,7 @@ to run the helm chart :
 helm install nodemongo ./nodemongo/
 verify: kubectl get all
 ```
-=======================================
+
 3. CI/CD
 I have added helmcidi.yml for CI/CD which is a github work flow.it will be trigured on a commit to any file in /src/ directory. 
 

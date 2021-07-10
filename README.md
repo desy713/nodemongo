@@ -1,10 +1,10 @@
-###1. docker build###
+### 1. docker build ###
 docker image build was done with the Dockerfile. built image was tagged as the latest and pushed to my dockerhub for deployment.
 
 ```shell
 docker build -t ronald20065/nodemongo . &&  docker push ronald20065/nodemongo
 ```
-###2. Helm chart###
+### 2. Helm chart ###
 
 sample helm chart was created,
 ```shell
@@ -123,7 +123,7 @@ helm install nodemongo ./nodemongo/
 verify: kubectl get all
 ```
 
-###3. CI/CD###
+### 3. CI/CD ###
 I have added helmcidi.yml for CI/CD which is a github work flow. It will be trigured on a commit to any file in /src/ directory. 
 * DOCKERPW and KUBECONFIG are stored as secrets in github
 * pipeline will build the image and push it to dockerhub as the latest tab
@@ -132,7 +132,7 @@ I have added helmcidi.yml for CI/CD which is a github work flow. It will be trig
 
 
 
-###4. RDS - AWS###
+### 4. RDS - AWS ###
 
 Files are in rds directory.
 Solusioin was coded using Terraform v0.12.21 version. state file is by defualt will be saved locally. (mock values were insereted for vpc/subnet ). 

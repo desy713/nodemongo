@@ -12,7 +12,7 @@ sample helm chart was created,
 ```
 Changes done are as follows:
 
-values.yaml file
+`values.yaml` file
 
 docker image repository is dockhub and stored in "ronald20065/nodemongo". To proceed with latest tag
  pullPolicy was updated to Always. It will do image check and download to local server when ever the helm update is run.
@@ -62,7 +62,7 @@ mongodb:
     port: 27017
 ```
 
-Chart.yaml 
+`Chart.yaml` 
 2 dependancies were included in chart.yaml file as follows. 
 
 ```yaml
@@ -88,7 +88,7 @@ run following commands.
 deployment.yaml
 
 docker image needs environment variables to start the image, as it is mentioned in the server.js.
-these vaules are fetched from values.yaml contect to below variables.
+these vaules are fetched from `values.yaml` contect to below variables.
 
 liveness-probe and rediness-probes were set to the /healthcheck 
 ```yaml

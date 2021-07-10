@@ -129,15 +129,15 @@ CI/CD
 
 
 
-======================================
+
 4. RDS - AWS
 
 Files are in rds directory.
 Solusioin was coded using Terraform v0.12.21 version. state file is by defualt will be saved locally. (mock values were insereted for vpc/subnet ). 
 aws credentials were passed through a profile set in provider section. Resources created are-
--mysql security group
--mysql db instance
--db subnet group
+*mysql security group
+*mysql db instance
+*db subnet group
 
 
 ```shell

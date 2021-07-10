@@ -65,7 +65,7 @@ mongodb:
 Below initContainer was created to start the application just after mongo service is up.
 ```yaml
  initContainers:
-   - name: init-myservice
+   - name: init-nodemongo
      image: busybox
      command: ['sh', '-c', 'until nslookup nodemongo-mongodb; do echo waiting for mongodb serrvicemeld; sleep 3; done;']
 ```

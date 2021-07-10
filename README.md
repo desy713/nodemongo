@@ -1,13 +1,15 @@
 =====================================================
 1. docker image build was done with the Dockerfile. built image was tagged as the latest and pushed to my dockerhub for deployment.
 
+```shell
 docker build -t ronald20065/nodemongo . &&  docker push ronald20065/nodemongo
-
+```
 2. Helm chart
 
 sample helm chart was created,
+```shell
   helm create nodemongo
-
+```
 Changes done are as follows:
 
 values.yaml file
@@ -63,7 +65,7 @@ mongodb:
 Chart.yaml 
 2 dependancies were included in chart.yaml file as follows. 
 
-
+```yaml
 dependencies:
 - name: nginx-ingress
   version: 1.41.2
@@ -73,22 +75,23 @@ dependencies:
   repository: alias:bitnami
   alias: mongodb
   condition: mongodb.enabled
-
+```
 
 below tow repos are used to get the dependancy charts. to add/update and include the dependancies 
 run following commands.
+```shell
   helm repo add stable https://charts.helm.sh/stable
   helm repo add bitnami https://charts.bitnami.com/bitnami
   helm repo update
   helm dep update ./nodemongo/
-
+```
 deployment.yaml
 
 docker image needs environment variables to start the image, as it is mentioned in the server.js.
 these vaules are fetched from values.yaml contect to below variables.
 
 liveness-probe and rediness-probes were set to the /healthcheck 
-
+```yaml
           env:
             - name: DB_HOST
               value: {{ .Release.Name }}-mongodb
@@ -112,10 +115,13 @@ liveness-probe and rediness-probes were set to the /healthcheck
             httpGet:
               path: /healthcheck
               port: 8080
+```
 
-
-to run the helm chart : helm install nodemongo ./nodemongo/
+to run the helm chart : 
+```shell
+helm install nodemongo ./nodemongo/
 verify: kubectl get all
+```
 =======================================
 CI/CD
 
@@ -128,5 +134,6 @@ RDS - AWS
 state file is by defualt will be saved locally. (mock values were insereted for vpc/subnet ). 
 aws credentials were passed through a profile set in provider section
 
-
+```shell
 terraform plan -var-file="vars.tfvar"
+```

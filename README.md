@@ -123,14 +123,13 @@ helm install nodemongo ./nodemongo/
 verify: kubectl get all
 ```
 =======================================
-CI/CD
+3. CI/CD
+I have added helmcidi.yml for CI/CD which is a github work flow.it will be trigured on a commit to any file in /src/ directory. 
 
 
 
 
-
-
-##4. RDS - AWS
+4. RDS - AWS
 
 Files are in rds directory.
 Solusioin was coded using Terraform v0.12.21 version. state file is by defualt will be saved locally. (mock values were insereted for vpc/subnet ). 
